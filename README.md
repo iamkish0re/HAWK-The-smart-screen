@@ -8,34 +8,36 @@ What it is?
   
 ## Structure
 
-GUI:
+  GUI:
     Start with password_test.py
-Libraries used:
-os 
-time
-ctypes
-tkinter
-shutil
-functools
 
-GUI FILES: 
-password_test.py --- For the Authentication
-gui_pack.py --- For the control panel GUI
-folder_gui.py --- For File selection using windows dialogue box
-pass.txt --- Contains password(HAVE TO THINK ABOUT STORING IN DIFFERENT FORMAT)
-flag.py --- Holds the setting options ON/OFF as flags
---------------------------------------------------------------------------
-THE BACKEND:
-    Start with p.py
-Libraries used:
-cv2
-numpy
-imutils
-wmi
-scipy
-face_recognition
+  Libraries used:
+  1. os 
+  2. time
+  3. ctypes
+  4. tkinter
+  5. shutil
+  6. functools
 
-FILES:
-p.py -- The service code that runs and monitors in the BG
-detect.py --- The face detection code
-shape_predictor_68_face_landmarks.dat --- The dlib uses this dat file for face mapping
+  GUI FILES: 
+  1. `password_test.py`: For the Authentication
+  2. `gui_pack.py`: For the control panel GUI
+  3. `folder_gui.py`: For File selection using windows dialogue box
+  4. `pass.txt`: Contains password(HAVE TO THINK ABOUT STORING IN DIFFERENT FORMAT)
+  5. `flag.py`: Holds the setting options ON/OFF as flags
+  --------------------------------------------------------------------------
+  THE BACKEND:
+      Start with p.py
+      
+  Libraries used:
+  1. cv2
+  2. numpy
+  3. imutils
+  4. wmi
+  5. scipy
+  6. face_recognition
+
+  BACKEND FILES:
+  1. `p.py`: The service code that runs and monitors in the BG
+  2. `detect.py`: The face detection code
+  3. `shape_predictor_68_face_landmarks.dat`: The dlib uses this dat file for face mapping
