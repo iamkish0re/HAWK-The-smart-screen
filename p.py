@@ -9,23 +9,34 @@ import argparse
 import imutils
 import time
 import dlib
-import cv2
+import os
 import ctypes
 import threading
 import wmi
 import brightness as b
 import detect as d
 import face_recognition
+import cv2
+
 #calculates the face mapping
 
-user2_image = face_recognition.load_image_file("users/user2.jpg")
-user2_face_encoding = face_recognition.face_encodings(user2_image)[0]
+face_files = os.listdir('users/')
+names = [face.split('.')[0] for face in face_files]
+encodings = []
+print("Loading faces : ")
+for face in face_files:
+    face_file_path = 'users/' + face
+    print(face_file_path)
+    img = face_recognition.load_image_file(face_file_path)
+    encodings.append(face_recognition.face_encodings(img)[0])
+print(face_files, names, encodings)
 
-user3_image = face_recognition.load_image_file("users/user3.jpg")
-user3_face_encoding = face_recognition.face_encodings(user3_image)[0]
+# load_face('users/')
 
-known_face_encodings = [user2_face_encoding, user3_face_encoding]
-known_face_names = ["ALEX","KISHORE"]
+known_face_encodings = encodings
+known_face_names = names
+
+print(known_face_encodings, known_face_names)
 #overide the inbuilt camera with a webcam connected to porrt 0 (DEFAULT)
 ap = argparse.ArgumentParser()
 ap.add_argument("-w", "--webcam", type=int, default=0,
@@ -61,7 +72,7 @@ c=0
 
 #Flags for System Operations
 AUTOLOCK_FLAG = 0
-TIME_FLAG=0
+TIME_FLAG = 0
 DROWS_FLAG = 0
 l=0
 
@@ -158,23 +169,23 @@ while True:
     if(CHECK_USER==1):
         s2=time.localtime().tm_sec #takes invocation time
         print(c)
-        print(s1)
-        print(s2)
+        print("END TIME:", s1)
+        print("STR TIME:", s2)
         if(abs(s1-s2)==20): #works every 20 seconds
             while True:
                 s2=time.localtime().tm_sec
                 if(abs(s1-s2)!=30):
-                    l=d.detect_face(frame_detection, known_face_encodings, known_face_names)
-                    c=c+l       #dummy counter to check if faces have been identified
-                    
-            if(c==0):
-                print("Locking  due to unauthenticated or no user...")
-                ctypes.windll.user32.LockWorkStation()
-                break
-            else:
-                c=0
-                s1=time.localtime().tm_sec
-                m1=time.localtime().tm_min
+                    l, name=d.detect_face(frame_detection, known_face_encodings, known_face_names)
+                    print("Detected : ", name)
+                    c = c+l       #dummy counter to check if faces have been identified
+                if(c==0):
+                    print("Locking  due to unauthenticated or no user...")
+                    ctypes.windll.user32.LockWorkStation()
+                    break
+                else:
+                    c=0
+                    s1=time.localtime().tm_sec
+                    m1=time.localtime().tm_min
     cv2.imshow("Frame", frame)
     key = cv2.waitKey(1) & 0xFF
         
@@ -182,11 +193,3 @@ while True:
         break
 cv2.destroyAllWindows()
 #vs.stop()
-
-
-
-
-
-
-
-
