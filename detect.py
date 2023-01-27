@@ -1,7 +1,7 @@
-import face_recognition
-import cv2
-import numpy as np
-import os
+# import face_recognition
+# import cv2
+# import numpy as np
+# import os
 
 def detect_face(frame, known_face_encodings, known_face_names):
     flag = 0
@@ -48,4 +48,4 @@ def detect_face(frame, known_face_encodings, known_face_names):
                     flag=0
 
 
-    return flag
+    return flag, name
