@@ -1,15 +1,16 @@
 import json
 
 CREDENTIALS_SCHEMA = {"name": "", "password": "", "face_encoding": ""}
+CREDENTIALS_FILE   = 'resources/credentials.json'
 
 def read_all_user():
-    with open('resources/credentials.json') as json_file:
+    with open(CREDENTIALS_FILE) as json_file:
         credentials = json.load(json_file)
     return credentials
 
 def save_credentials(credentials : dict):
-    with open('resources/credentials.json', 'w') as credentials_file:
-        json.dump(credentials, credentials_file)
+    with open(CREDENTIALS_FILE) as cred_file:
+        json.dump(credentials, cred_file)
 
 def is_user_exists(user_list, username):
     if len(user_list) == 0:
