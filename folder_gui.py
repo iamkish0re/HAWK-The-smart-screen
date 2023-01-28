@@ -13,12 +13,13 @@ def fg():
             self.minsize(400, 200)
             #self.wm_iconbitmap('icon.ico')
 
+            self.src = ''
+
             self.labelFrame = ttk.LabelFrame(self, text = "Open File")
             self.labelFrame.grid(column = 0, row = 1, padx = 20, pady = 20)
 
             #self.button()
-            self.src = self.fileDialog()
-            self.fileCopy(self.src)
+            
             self.checkbox()
             #self.Button(self, text='Quit', command=self.quit).grid(row=4, sticky=W, pady=4)
 
@@ -26,7 +27,10 @@ def fg():
         #def button(self):
         #   self.button = ttk.Button(self, text = "OK")
         #  self.button.grid(column = 1, row = 1)
-
+        def browse(self):
+            self.src = self.fileDialog()
+            if self.src != '':
+                self.fileCopy(self.src)
 
         def fileDialog(self):
 
@@ -40,7 +44,7 @@ def fg():
 
         def fileCopy(self, srcpath):
             self.currentDirec = os.getcwd()
-            despath = "C:\\Users\\kisho\\Desktop\\HAWK_V2.0\\User_faces"
+            despath = "users/"
             folder_exist = os.path.exists(despath)
 
             if(folder_exist): 
@@ -56,8 +60,11 @@ def fg():
             self.PRIVACYFLAG = IntVar()
             self.LOCKFLAG = IntVar()
 
+            
             Label(self, text="Select ...").grid(row=0, sticky=W)
-
+            
+            Button(self, text='Browse', command=self.browse).grid(row=1, column = 4, sticky=W, pady=4)
+            
             Checkbutton(self, text="Brightness", variable= self.BRIGHTFLAG).grid(row=3, sticky=W)
             Checkbutton(self, text="Privacy Protection", variable= self.PRIVACYFLAG).grid(row=4, sticky=W)
             Checkbutton(self, text="Auto Lock", variable=self.LOCKFLAG).grid(row=5, sticky=W)
