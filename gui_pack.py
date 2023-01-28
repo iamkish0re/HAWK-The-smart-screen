@@ -44,7 +44,7 @@ def gui():
     class user_details(tk.Frame):
         def __init__(self, parent, controller):
             tk.Frame.__init__(self, parent)
-            cur_dir = os.getcwd() + '\\users'
+            cur_dir = os.getcwd() + 'users/'
             names = [f for f in os.listdir(cur_dir) if os.path.isfile(os.path.join(cur_dir, f))]
             for name in range(len(names)):
                 names[name] = names[name].split(".")[0]
@@ -65,7 +65,6 @@ def gui():
             button4.pack()
 
     class Settings(tk.Frame):
-        
         def save_flag(self):
                 flag = os.getcwd() + '\\flag.txt'
                 f = open(flag, 'w+')
@@ -163,14 +162,13 @@ def gui():
             tk.Frame.__init__(self,parent)
             tk.Label(self,text = "Say cheese!!!")
             tk.Button(self, text="Back", command = lambda:controller.show_frame(user_details)).pack
-            
-            '''self.snapshot()    
+            self.newname = name
+            self.snapshot()    
         
         def snapshot(self):
-            
-            path = os.getcwd() + "\\users"
-            filename = newname + ".jpg"
-            while newname == " ":
+            path = os.getcwd() + "users/"
+            filename = self.newname + ".jpg"
+            while self.newname == " ":
                 camera = cv2.VideoCapture(0)
                 return_value,image = camera.read()
                 gray = cv2.cvtColor(image,cv2.COLOR_BGR2GRAY)
@@ -179,7 +177,7 @@ def gui():
                       cv2.imwrite(os.path.join(path ,filename),image)
                       break
             camera.release()
-            cv2.destroyAllWindows()'''
+            cv2.destroyAllWindows()
 
     app = SeaofBTCapp()
     app.mainloop()
