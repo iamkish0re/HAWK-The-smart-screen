@@ -1,4 +1,4 @@
-# HAWK-The-smart-screen-application
+# HAWK - The smart screen application
 
 What it is?
   Say, You dont have a windows feature like face unlock or secureness of PC or Laptop from peepers.
