@@ -9,7 +9,7 @@ def read_all_user():
     return credentials
 
 def save_credentials(credentials : dict):
-    with open(CREDENTIALS_FILE) as cred_file:
+    with open(CREDENTIALS_FILE, 'w+') as cred_file:
         json.dump(credentials, cred_file)
 
 def is_user_exists(user_list, username):
@@ -40,6 +40,6 @@ def create_user(username, password):
     new_user['face_encoding'] = []
     return new_user
 
-# def delete_user(username: str):
+def delete_user(username: str):
+    return 1
 
-print(add_user({'name': 'test_user', 'password': 'test_pass', 'face_encoding': 'test_encoding'}))
