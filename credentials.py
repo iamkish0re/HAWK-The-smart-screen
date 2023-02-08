@@ -1,15 +1,16 @@
 import json
 
 CREDENTIALS_SCHEMA = {"name": "", "password": "", "face_encoding": ""}
+CREDENTIALS_FILE   = 'resources/credentials.json'
 
 def read_all_user():
-    with open('resources/credentials.json') as json_file:
+    with open(CREDENTIALS_FILE) as json_file:
         credentials = json.load(json_file)
     return credentials
 
 def save_credentials(credentials : dict):
-    with open('resources/credentials.json', 'w') as credentials_file:
-        json.dump(credentials, credentials_file)
+    with open(CREDENTIALS_FILE, 'w+') as cred_file:
+        json.dump(credentials, cred_file)
 
 def is_user_exists(user_list, username):
     if len(user_list) == 0:
@@ -39,6 +40,11 @@ def create_user(username, password):
     new_user['face_encoding'] = []
     return new_user
 
-# def delete_user(username: str):
+def delete_user(username: str):
+    return 1
 
-print(add_user({'name': 'test_user', 'password': 'test_pass', 'face_encoding': 'test_encoding'}))
+def check_user(username, password):
+    users = read_all_user()['users']
+    current_user = [user for user in users if user['name'] == username and user['password'] == password]
+
+    return current_user
