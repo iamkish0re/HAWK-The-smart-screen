@@ -43,3 +43,8 @@ def create_user(username, password):
 def delete_user(username: str):
     return 1
 
+def check_user(username, password):
+    users = read_all_user()['users']
+    current_user = [user for user in users if user['name'] == username and user['password'] == password]
+
+    return current_user

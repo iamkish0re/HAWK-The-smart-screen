@@ -1,4 +1,5 @@
 import tkinter as tk
+import credentials as cr
 
 class HomePage(tk.Frame):
     def __init__(self, parent, controller):
@@ -26,7 +27,36 @@ class LoginPage(tk.Frame):
         tk.Frame.__init__(self, parent)
         self.controller = controller
         self.label = tk.Label(self, text="Login Page")
-        self.label.pack(pady=10)
+        self.label.pack()
+        self.create_widgets()
+
+    def create_widgets(self):
+        self.username_label = tk.Label(self, text="Username:")
+        self.username_label.pack()
+
+        self.username_entry = tk.Entry(self)
+        self.username_entry.pack()
+
+        self.password_label = tk.Label(self, text="Password:")
+        self.password_label.pack()
+
+        self.password_entry = tk.Entry(self, show="*")
+        self.password_entry.pack()
+
+        self.login_button = tk.Button(self, text="Login", command=self.verify)
+        self.login_button.pack()
+
+    def verify(self):
+                
+        entered_username = self.username_entry.get()
+        entered_password = self.password_entry.get()
+        user  = cr.check_user(entered_username, entered_password)
+
+        if len(user) == 3:
+            self.master.destroy()
+            return
+
+        tk.messagebox.showerror("Error", "Incorrect username or password")
 
 class MainApp(tk.Tk):
     def __init__(self):
