@@ -7,6 +7,24 @@ What it is?
   HAWK provides a way to incorporate those features with your windows/linux OS as an application(currently not available for linux)
   
 ## Structure
+HAWK/
+├── db/
+│   ├── hawk.db
+│   └── haarcascade_frontalface_default.xml
+│   └── db.py
+├── gui/
+│   ├── __init__.py
+│   ├── main.py
+│   └── utils.py
+├── face_detection/
+│   ├── __init__.py
+│   └── detect_faces.py
+├── speech_assistant/
+│   ├── __init__.py
+│   ├── speech_recognition.py
+│   └── text_to_speech.py
+├── requirements.txt
+└── main.py
 
   GUI:
     Start with password_test.py
