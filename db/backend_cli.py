@@ -1,6 +1,23 @@
 import getpass
+import os
 
+import db
 
+DB_PATH = 'hawk.db'
+
+def initial():
+    isFirst = os.path.isfile(DB_PATH)
+    if not isFirst:
+        print("|*********************************************************|")
+        print("|                                                         |")
+        print("|******************* HAWK WELCOMES YOU *******************|")
+        print("|                                                         |")
+        print("|*********************************************************|")
+        username = input("Username :")
+        password = getpass.getpass('Password :')
+    else:
+        print("GO TO MAIN")
+    
 def main():
     print("|*********************************************************|")
     print("|                                                         |")
@@ -25,4 +42,4 @@ def main():
     print("|    2. Settings                                          |")
     print("***********************************************************")
 
-main()
+print(initial())
