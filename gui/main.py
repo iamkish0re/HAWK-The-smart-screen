@@ -1,74 +1,51 @@
-#import modules
-from tkinter import *
-import os
-import folder_gui as fg
-import time
-import ctypes
-import gui_pack as gp
+import PySimpleGUI as sg 
+from pathlib import Path
+import configparser
 
-# Designing Main(first) window
+def main_window():
+    menu_def = [["File", ["Setting", "Theme", "---", "Exit"]],
+                ["Help", ["About"]]]
+    layout = [
+        [sg.MenubarCustom(menu_def, tearoff=False)],
+        [sg.Text("Authentication Needed!")],
+        [
+            sg.Text("Username :", s=16, justification='center'),
+            sg.Input(key="-USERNAME-",s=25)],
+        [
+            sg.Text("Password :", s=16, justification='center'),
+            sg.Input(key="-PASSWORD-", s=25)],
+        [sg.Button("Authenticate")],
+        [sg.Text("Hawk watches you!", justification='center')]
+    ]
+    title = settings["GUI"]["title"]
+    window = sg.Window(title, layout, use_custom_titlebar=True, element_padding=10)
 
-def main_account_screen():
-    global main_screen
-    main_screen = Tk()
-    main_screen.configure(background = "black")
-    main_screen.geometry("350x300")
-    main_screen.title("Account Login")
-    Label(text="HAWK watches you!", bg="blue", width="300", height="2").pack()
+    while True:
+        event, values = window.read()
+        print(event, values)
+        if event in (sg.WINDOW_CLOSED, "Exit"):
+            break
+        if event == "About":
+            sg.popup(title, "Version 1.0",
+                     "Hawk, all in one secure space!", grab_anywhere=True)
+        elif event == "Authenticate":
+            sg.popup_no_titlebar("UNDER DEVELOPMENT!")
+        
+    window.close()
 
-    global password_verify
-
-    username_verify = StringVar()
-    password_verify = StringVar()
-
-    global password_login_entry
-    Label(main_screen, text="Password *").pack()
-    
-    password_login_entry = Entry(main_screen, textvariable=username_verify)
-    password_login_entry.pack()
-    password_login_entry = Entry(main_screen, textvariable=password_verify, show= '*')
-    password_login_entry.pack()
-    Label(main_screen, text="").pack()
-    Button(main_screen, text="AUTHENTICATE", width=15, height=1, command = check_password).pack()
-    
-    main_screen.mainloop()
-
-
-    
-def list_users(text):
-    cur_dir = os.getcwd() + '\\User_faces'
-    names = [f for f in os.listdir(cur_dir) if os.path.isfile(os.path.join(cur_dir, f))]
-    for name in len(names):
-        names[name] = name.split(".")[0]
-    
-
-
-# Implementing event on login button 
-
-def check_password():
-    file = "pass"
-    check_password.pass_attempts
-    password1 = password_verify.get()
-    password_login_entry.delete(0, END)
-    msg = Label(main_screen, text="")
-    list_of_files = os.listdir()
-    if file in list_of_files:
-        file1 = open(file, "r")
-        verify = file1.read().splitlines()
-        if password1 == 'k':
-            main_screen.destroy()
-            gp.gui()
+if __name__ == "__main__":
+    CONFIG_PATH = Path.cwd()
+    config = configparser.ConfigParser()
+    # CHECKS IF CONFIG.INI IS PRESENT, IF NOT CREATES IT WITH DEFAULT SETTINGS!
+    if not Path(CONFIG_PATH / 'config.ini').exists():
+        config['GUI'] = {'title': 'Hawk', 'font_size': 10, 'font_family': 'consolas'}
+        config.write(open('config.ini', 'w'))
             
-    check_password.pass_attempts += 1
-    if check_password.pass_attempts == 3:
-        Label(main_screen, text='Unauthorized login attempt')
-        time.sleep(3.0)
-        main_screen.destroy()
-        ctypes.windll.user32.LockWorkStation()
-    else:
-        msg.configure(text='Try again. Attempt %i/3' % (check_password.pass_attempts + 1))
-        msg.pack()
-        
-        
-check_password.pass_attempts = 0
-main_account_screen()
+    settings = sg.UserSettings(
+        path=CONFIG_PATH, filename='config.ini', use_config_file=True, convert_bools_and_none=True
+    )
+    font_family = settings["GUI"]["font_family"]
+    font_size = int(settings["GUI"]["font_size"])
+
+    sg.set_options(font=(font_family, font_size))
+    main_window()
