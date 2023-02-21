@@ -1,0 +1,25 @@
+certifi==2022.12.7
+click @ file:///D:/bld/click_1666798499870/work
+cmake==3.25.0
+colorama @ file:///home/conda/feedstock_root/build_artifacts/colorama_1666700638685/work
+contourpy @ file:///D:/bld/contourpy_1673633852898/work
+cycler @ file:///home/conda/feedstock_root/build_artifacts/cycler_1635519461629/work
+dlib @ file:///D:/bld/dlib_1670031450416/work
+face-recognition @ file:///home/conda/feedstock_root/build_artifacts/face_recognition_1619808233029/work
+face-recognition-models @ file:///home/conda/feedstock_root/build_artifacts/face_recognition_models_1595707436534/work
+fonttools @ file:///D:/bld/fonttools_1666827219016/work
+imutils @ file:///D:/bld/imutils_1667697685888/work
+kiwisolver @ file:///D:/bld/kiwisolver_1666805897768/work
+matplotlib @ file:///D:/bld/matplotlib-suite_1674079001997/work
+munkres==1.1.4
+numpy @ file:///D:/bld/numpy_1672415944144/work
+opencv-python==4.7.0.68
+packaging @ file:///home/conda/feedstock_root/build_artifacts/packaging_1673482170163/work
+Pillow @ file:///D:/bld/pillow_1672675426820/work
+pyparsing @ file:///home/conda/feedstock_root/build_artifacts/pyparsing_1652235407899/work
+python-dateutil @ file:///home/conda/feedstock_root/build_artifacts/python-dateutil_1626286286081/work
+pywin32==305
+scipy @ file:///C:/bld/scipy_1658811088396/work
+six @ file:///home/conda/feedstock_root/build_artifacts/six_1620240208055/work
+unicodedata2 @ file:///D:/bld/unicodedata2_1667240049903/work
+WMI==1.5.1
