@@ -31,19 +31,7 @@ HAWK/
 
   Libraries used:
   1. os 
-  2. time
-  3. ctypes
-  4. tkinter
-  5. shutil
-  6. functools
-
-  GUI FILES: 
-  1. `password_test.py`: For the Authentication
-  2. `gui_pack.py`: For the control panel GUI
-  3. `folder_gui.py`: For File selection using windows dialogue box
-  4. `pass.txt`: Contains password(HAVE TO THINK ABOUT STORING IN DIFFERENT FORMAT)
-  5. `flag.py`: Holds the setting options ON/OFF as flags
-  --------------------------------------------------------------------------
+  TODO: add recent changes with explanation  --------------------------------------------------------------------------
   THE BACKEND:
       Start with p.py
       
